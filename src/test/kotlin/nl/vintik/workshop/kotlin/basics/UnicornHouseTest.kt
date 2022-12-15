@@ -81,7 +81,7 @@ internal class UnicornHouseTest {
         unicornHouse.enter(badUnicorn)
         unicornHouse.enter(europeanUnicorn)
 
-        val result = unicornHouse.orderBySize()
+        val result = unicornHouse.orderBySizeDescending()
         assertEquals(UnicornType.MALICORN, result[0].type)
         assertEquals(UnicornType.UNICORN, result[1].type)
         assertEquals(UnicornType.DEMICORN, result[2].type)
