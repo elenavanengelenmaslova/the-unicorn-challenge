@@ -13,6 +13,9 @@ class UnicornHouse {
      */
     fun enter(unicorn: Unicorn): String {
         unicorns.add(unicorn)
+        unicorn.description?.let {
+            println("Unicorn description: $it")
+        }
         return when (unicorn.type) {
             UnicornType.UNICORN -> "Welcome European Unicorn ${unicorn.name}"
             UnicornType.DEMICORN -> "Welcome Mild Magic Unicorn ${unicorn.name}"
@@ -21,4 +24,11 @@ class UnicornHouse {
     }
 
     fun exit(unicornId: String) = unicorns.removeIf { it.id == unicornId }
+
+    fun mapByType() = unicorns.associateBy { it.type }
+
+    fun orderBySize() = unicorns.sortedByDescending { it.size }
+
+    fun totalMagicInDaHouse() = unicorns.sumOf { it.magic ?: 0 }
+
 }
