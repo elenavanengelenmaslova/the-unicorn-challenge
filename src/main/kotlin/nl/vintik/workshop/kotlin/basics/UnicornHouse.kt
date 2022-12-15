@@ -1,5 +1,7 @@
 package nl.vintik.workshop.kotlin.basics
 
+import java.util.UUID
+
 class UnicornHouse {
     /**
      * Collections such as list or map by default are immutable, you need to explicitly specify one as mutable
@@ -23,7 +25,11 @@ class UnicornHouse {
         }
     }
 
-    fun exit(unicornId: String) = unicorns.removeIf { it.id == unicornId }
+    fun countUnicorns() = unicorns.size
+
+    fun countUnicornsByType(unicornType: UnicornType) = unicorns.count { it.type == unicornType }
+
+    fun exit(unicornId: UUID) = unicorns.removeIf { it.id == unicornId }
 
     fun mapByType() = unicorns.associateBy { it.type }
 

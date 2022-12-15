@@ -1,7 +1,9 @@
 package nl.vintik.workshop.kotlin.basics
 
+import java.util.UUID
+
 data class Unicorn(
-    val id: String,
+    val id: UUID,
     val name: String,
     val type: UnicornType,
     /**
