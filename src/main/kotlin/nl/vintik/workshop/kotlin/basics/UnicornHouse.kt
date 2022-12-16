@@ -37,6 +37,9 @@ class UnicornHouse {
 
     fun filterUnicornsByType(unicornType: UnicornType) = unicorns.filter { it.type == unicornType }
 
+    fun filterUnicornsBySize(unicornType: UnicornType) =
+        unicorns.filter { unicorn -> unicorn.size?.let { it > 10 } ?: false }
+
     fun totalMagicInDaHouse() = unicorns.sumOf { it.magic ?: 0 }
 
 }
