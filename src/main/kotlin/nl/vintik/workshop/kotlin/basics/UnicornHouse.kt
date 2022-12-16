@@ -31,9 +31,11 @@ class UnicornHouse {
 
     fun exit(unicornId: UUID) = unicorns.removeIf { it.id == unicornId }
 
-    fun mapByType() = unicorns.associateBy { it.type }
+    fun mapUnicornsByType() = unicorns.associateBy { it.type }
 
-    fun orderBySizeDescending() = unicorns.sortedByDescending { it.size }
+    fun orderUnicornsBySizeDescending() = unicorns.sortedByDescending { it.size }
+
+    fun filterUnicornsByType(unicornType: UnicornType) = unicorns.filter { it.type == unicornType }
 
     fun totalMagicInDaHouse() = unicorns.sumOf { it.magic ?: 0 }
 

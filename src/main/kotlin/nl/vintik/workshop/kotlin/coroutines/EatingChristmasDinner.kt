@@ -1,9 +1,6 @@
 package nl.vintik.workshop.kotlin.coroutines
 
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import nl.vintik.workshop.kotlin.basics.Unicorn
 import nl.vintik.workshop.kotlin.basics.UnicornHouse
 import nl.vintik.workshop.kotlin.basics.UnicornType
@@ -12,6 +9,7 @@ import kotlin.random.Random
 
 // Check out what zip does
 // Debug to see coroutines working
+// What is unusual in the restaurant?
 // Fill unicorn house with unicorns
 // make unicorns list accessible from outside the class
 // and let them eat Christmas dinner, display name of unicorn for each println
@@ -46,6 +44,7 @@ suspend fun eatChristmasDinner(unicorns: List<Unicorn>) {
 }
 
 suspend fun serveAndEat(unicorn: Unicorn, plate: Pair<String, String>) {
+    println("${unicorn.name}: Waiting for food")
     val (dish, size) = plate
     delay(Random.nextLong(100, 3000))
     println("${unicorn.name}: I got my food, let me start eating this: $dish that's $size cm")

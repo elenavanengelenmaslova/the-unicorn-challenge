@@ -12,3 +12,5 @@ fun Unicorn.toMalicorn() =
         null,
         null
     )
+
+fun Unicorn.computePower() = this.size?.let { this.magic?.times(this.size) }

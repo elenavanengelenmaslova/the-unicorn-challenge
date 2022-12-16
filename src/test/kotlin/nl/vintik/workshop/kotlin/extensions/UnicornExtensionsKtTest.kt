@@ -22,4 +22,32 @@ internal class UnicornExtensionsKtTest {
         val result = unicorn.toMalicorn()
         assertEquals(UnicornType.MALICORN, result.type)
     }
+
+    @Test
+    fun `should not compute unicorn power when size or magic null `() {
+        val unicorn = Unicorn(
+            UUID.randomUUID(),
+            "Nelly",
+            UnicornType.UNICORN,
+            null,
+            null,
+            null
+        )
+        val result = unicorn.computePower()
+        assertNull(result)
+    }
+
+    @Test
+    fun `should compute unicorn power when size and magic are set `() {
+        val unicorn = Unicorn(
+            UUID.randomUUID(),
+            "Nelly",
+            UnicornType.UNICORN,
+            10,
+            2,
+            null
+        )
+        val result = unicorn.computePower()
+        assertEquals(20, result)
+    }
 }
