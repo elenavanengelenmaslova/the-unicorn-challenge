@@ -27,11 +27,11 @@ class UnicornHouse {
         }
     }
 
+    fun exit(unicornId: UUID) = unicorns.removeIf { it.id == unicornId }
+
     fun countUnicorns() = unicorns.size
 
     fun countUnicornsByType(unicornType: UnicornType) = unicorns.count { it.type == unicornType }
-
-    fun exit(unicornId: UUID) = unicorns.removeIf { it.id == unicornId }
 
     fun mapUnicornsByType() = unicorns.associateBy { it.type }
 
