@@ -54,8 +54,7 @@ internal class UnicornHouseTest {
 
     @Test
     fun `should remove unicorn on exit`() {
-        unicornHouse.enter(badUnicorn)
-        unicornHouse.enter(europeanUnicorn)
+        unicornHouse.bulkEnter(badUnicorn, europeanUnicorn)
         assertEquals(2, unicornHouse.countUnicorns())
 
         unicornHouse.exit(badUnicornId)
@@ -66,8 +65,7 @@ internal class UnicornHouseTest {
 
     @Test
     fun `should map unicorns by type`() {
-        unicornHouse.enter(badUnicorn)
-        unicornHouse.enter(europeanUnicorn)
+        unicornHouse.bulkEnter(badUnicorn, europeanUnicorn)
 
         val result = unicornHouse.mapUnicornsByType()
         assertEquals(2, result.size)
@@ -77,9 +75,7 @@ internal class UnicornHouseTest {
 
     @Test
     fun `should order unicorns by size`() {
-        unicornHouse.enter(mildUnicorn)
-        unicornHouse.enter(badUnicorn)
-        unicornHouse.enter(europeanUnicorn)
+        unicornHouse.bulkEnter(mildUnicorn, badUnicorn, europeanUnicorn)
 
         val result = unicornHouse.orderUnicornsBySizeDescending()
         assertEquals(UnicornType.MALICORN, result[0].type)
@@ -89,10 +85,24 @@ internal class UnicornHouseTest {
 
     @Test
     fun `should count total magic in the house`() {
-        unicornHouse.enter(mildUnicorn)
-        unicornHouse.enter(badUnicorn)
-        unicornHouse.enter(europeanUnicorn)
+        unicornHouse.bulkEnter(mildUnicorn, badUnicorn, europeanUnicorn)
 
         assertEquals(40, unicornHouse.totalMagicInDaHouse())
+    }
+
+    @Test
+    fun `should filter unicorns by type`() {
+        unicornHouse.bulkEnter(mildUnicorn, badUnicorn, europeanUnicorn)
+        val result = unicornHouse.filterUnicornsByType(UnicornType.UNICORN)
+        assertEquals(1, result.size)
+        assertEquals(UnicornType.UNICORN, result[0].type)
+    }
+
+    @Test
+    fun `should filter unicorns by size`() {
+        unicornHouse.bulkEnter(mildUnicorn, badUnicorn, europeanUnicorn)
+        val result = unicornHouse.filterUnicornsBySize(20)
+        assertEquals(1, result.size)
+        assertEquals(20, result[0].size)
     }
 }

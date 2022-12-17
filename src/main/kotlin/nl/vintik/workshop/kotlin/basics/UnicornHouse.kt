@@ -27,6 +27,8 @@ class UnicornHouse {
         }
     }
 
+    fun bulkEnter(vararg unicorn: Unicorn): List<String> = unicorn.map { enter(it) }
+
     fun exit(unicornId: UUID) = unicorns.removeIf { it.id == unicornId }
 
     fun countUnicorns() = unicorns.size
@@ -39,8 +41,8 @@ class UnicornHouse {
 
     fun filterUnicornsByType(vararg unicornType: UnicornType) = unicorns.filterByType(*unicornType)
 
-    fun filterUnicornsBySize(size: Int) =
-        unicorns.filterBySize(size)
+    fun filterUnicornsBySize(sizeFrom: Int) =
+        unicorns.filterBySize(sizeFrom)
 
     fun totalMagicInDaHouse() = unicorns.sumOf { it.magic ?: 0 }
 
