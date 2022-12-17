@@ -1,18 +1,16 @@
 package nl.vintik.workshop.kotlin.coroutines
 
-import kotlinx.coroutines.*
-import nl.vintik.workshop.kotlin.basics.Unicorn
-import nl.vintik.workshop.kotlin.basics.UnicornHouse
-import nl.vintik.workshop.kotlin.basics.UnicornType
-import java.util.*
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlin.random.Random
 
-// Check out what zip does
-// Debug to see coroutines working
-// What is unusual in the restaurant?
-// Fill unicorn house with unicorns
-// make unicorns list accessible from outside the class
-// and let them eat Christmas dinner, display name of unicorn for each println
+// TODO: Check out what zip does
+// TODO: Debug to see coroutines working
+// TODO: What is unusual in the restaurant?
+// TODO: Fill unicorn house with unicorns
+// TODO: Let unicorns eat Christmas dinner, display name of unicorn for each println within coroutine scope
 
 val plates = listOf(
     "Stuffed Turkey",
@@ -24,62 +22,27 @@ val plates = listOf(
 
 fun main() {
     runBlocking {
-        eatChristmasDinner(fillDaHouse().unicorns)
+        eatChristmasDinner()
     }
 }
 
-suspend fun eatChristmasDinner(unicorns: List<Unicorn>) {
+suspend fun eatChristmasDinner() {
     coroutineScope {
-        unicorns.forEach { unicorn ->
-            println("The Unicorn ${unicorn.name} came in!")
-            plates.forEach { plate ->
-                launch {
-                    serveAndEat(unicorn, plate)
-                }
+        plates.forEach { plate ->
+            println("The Unicorn came in!")
+            launch {
+                serveAndEat(plate)
             }
         }
-
     }
     println("Is everyone done?")
 }
 
-suspend fun serveAndEat(unicorn: Unicorn, plate: Pair<String, String>) {
-    println("${unicorn.name}: Waiting for food")
+suspend fun serveAndEat(plate: Pair<String, String>) {
+    println("Waiting for food")
     val (dish, size) = plate
     delay(Random.nextLong(100, 3000))
-    println("${unicorn.name}: I got my food, let me start eating this: $dish that's $size cm")
+    println("I got my food, let me start eating this: $dish that's $size cm")
     delay(Random.nextLong(100, 3000))
-    println("${unicorn.name} I'm done eating: $dish that's $size cm")
-}
-
-fun fillDaHouse(): UnicornHouse {
-    val badUnicorn = Unicorn(
-        UUID.randomUUID(),
-        "Bob",
-        UnicornType.MALICORN,
-        20,
-        10,
-        "Bad unicorn"
-    )
-    val europeanUnicorn = Unicorn(
-        UUID.randomUUID(),
-        "Jane",
-        UnicornType.UNICORN,
-        10,
-        30,
-        "Euro unicorn"
-    )
-    val mildUnicorn = Unicorn(
-        UUID.randomUUID(),
-        "John",
-        UnicornType.DEMICORN,
-        null,
-        null,
-        null
-    )
-    val daHouse = UnicornHouse()
-    daHouse.enter(badUnicorn)
-    daHouse.enter(europeanUnicorn)
-    daHouse.enter(mildUnicorn)
-    return daHouse
+    println("I'm done eating: $dish that's $size cm")
 }
