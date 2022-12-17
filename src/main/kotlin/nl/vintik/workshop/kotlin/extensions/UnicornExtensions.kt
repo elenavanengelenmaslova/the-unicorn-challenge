@@ -14,3 +14,8 @@ fun Unicorn.toMalicorn() =
     )
 
 fun Unicorn.computePower() = this.size?.let { this.magic?.times(this.size) }
+
+fun List<Unicorn>.filterByType(vararg unicornType: UnicornType) = this.filter { it.type in unicornType }
+
+fun List<Unicorn>.filterBySize(size: Int) =
+    this.filter { unicorn -> unicorn.size?.let { it > size } ?: false }

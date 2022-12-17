@@ -1,5 +1,7 @@
 package nl.vintik.workshop.kotlin.basics
 
+import nl.vintik.workshop.kotlin.extensions.filterBySize
+import nl.vintik.workshop.kotlin.extensions.filterByType
 import java.util.UUID
 
 class UnicornHouse {
@@ -35,12 +37,10 @@ class UnicornHouse {
 
     fun orderUnicornsBySizeDescending() = unicorns.sortedByDescending { it.size }
 
-    fun filterUnicornsByType(unicornType: UnicornType) = unicorns.filter { it.type == unicornType }
+    fun filterUnicornsByType(vararg unicornType: UnicornType) = unicorns.filterByType(*unicornType)
 
     fun filterUnicornsBySize(size: Int) =
-        unicorns.filter { unicorn -> unicorn.size?.let { it > size } ?: false }
-
-    fun filterBigUnicorns() = filterUnicornsBySize(10)
+        unicorns.filterBySize(size)
 
     fun totalMagicInDaHouse() = unicorns.sumOf { it.magic ?: 0 }
 
